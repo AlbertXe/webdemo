@@ -19,6 +19,7 @@ public class UserSericeImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+
     @Override
     public List<User2> users() {
         List<User2> user2List = new ArrayList<>();

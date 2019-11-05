@@ -5,4 +5,9 @@
         select * from book
         where id =#{id}
     </select>
+
+    <select id="getCount" resultType="java.util.Map">
+        select count(0) as sumNum ,sum(id) as idSum from book
+        where id> #{id}
+    </select>
 </mapper>

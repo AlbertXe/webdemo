@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User2> users();
+    List<User2> users();
 }
