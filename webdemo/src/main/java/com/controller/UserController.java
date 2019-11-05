@@ -1,8 +1,10 @@
 package com.controller;
 
-import com.dao.UserDao;
-import com.github.pagehelper.PageHelper;
-import com.pojo.User;
+import com.dao.BookDao;
+import com.github.pagehelper.PageInfo;
+import com.pojo.Book;
+import com.pojo.User2;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,17 +18,22 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
+    @Autowired
+    private BookDao bookDao;
 
     @RequestMapping("/users")
-    public List<User> users() {
-        System.out.println("users");
+    public List<User2> users() {
+        List<User2> users = userService.users();
+        PageInfo pageInfo = new PageInfo(users);
 
-        PageHelper.startPage(1, 5);
-        List<User> users = userDao.getUsers();
-//        PageInfo pageInfo = new PageInfo(users);
-//        List list = pageInfo.getList();
+        long total = pageInfo.getTotal();
+        System.out.println("total=" + total);
 
+        Book book = bookDao.selectById(1);
+        System.out.println(book);
         return users;
     }
+
+
 }

@@ -11,4 +11,5 @@ public interface UserDao {
 
     @Select("select * from user")
     List<User> getUsers();
+
 }
