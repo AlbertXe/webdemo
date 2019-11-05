@@ -20,6 +20,7 @@ public class BookController {
     public Book getBook(String id) {
         System.out.println("id=" + id);
         Book book = bookDao.selectById(Long.valueOf(id));
+        System.out.println(book);
         return book;
     }
 }
