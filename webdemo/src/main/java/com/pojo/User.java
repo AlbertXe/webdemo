@@ -1,7 +1,10 @@
 package com.pojo;
 
+import com.aop.DateFormat;
+
 public class User {
     private String id;
+    @DateFormat
     private String name;
 
     public String getId() {

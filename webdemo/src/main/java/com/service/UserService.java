@@ -1,10 +1,10 @@
 package com.service;
 
-import com.pojo.User2;
+import com.pojo.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<User2> users();
+    List<User> users();
 }

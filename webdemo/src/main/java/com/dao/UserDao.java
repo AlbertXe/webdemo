@@ -11,5 +11,6 @@ public interface UserDao {
 
     @Select("select * from user")
     List<User> getUsers();
-
+    @Select("select * from user where id=#{id}")
+    User getUser(String id);
 }
