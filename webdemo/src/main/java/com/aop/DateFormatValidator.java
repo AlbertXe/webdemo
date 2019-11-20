@@ -1,20 +1,21 @@
 package com.aop;
 
+import com.util.DateUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class DateFormatValidator implements ConstraintValidator<DateFormat,String> {
-    private String format;
+    private DateFormat dateFormat;
     @Override
     public void initialize(DateFormat constraintAnnotation) {
-        this.format = constraintAnnotation.format();
-        System.out.println("format:"+format);
+        this.dateFormat = constraintAnnotation;
     }
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         System.out.println(s);
-        if (s.length() == 8) {
+        if (DateUtils.isValid(s, dateFormat.format())) {
             return true;
         }
         String template = constraintValidatorContext.getDefaultConstraintMessageTemplate();
