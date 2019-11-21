@@ -22,6 +22,7 @@ public class SftpUtils {
 
     /**
      * 建立连接，放回SFTP
+     *
      * @param s
      */
     public static void connect(SFTP s) {
@@ -57,6 +58,7 @@ public class SftpUtils {
 
     /**
      * 关闭连接
+     *
      * @param s
      */
     public static void disConnect(SFTP s) {
@@ -80,8 +82,9 @@ public class SftpUtils {
 
     /**
      * 上传文件
+     *
      * @param localFile 本地文件
-     * @param outDir 服务器目录
+     * @param outDir    服务器目录
      */
     public static void upload(String localFile, String outDir) throws FileNotFoundException {
         SFTP s = new SFTP();
@@ -90,7 +93,7 @@ public class SftpUtils {
         try {
             sftp.cd(outDir);//进入目录
         } catch (SftpException e) {
-            if (e.id == sftp.SSH_FX_NO_SUCH_FILE){
+            if (e.id == sftp.SSH_FX_NO_SUCH_FILE) {
                 try {
                     sftp.mkdir(outDir);//创建并且 进入目录
                     sftp.cd(outDir);
@@ -108,7 +111,7 @@ public class SftpUtils {
 
         } catch (SftpException e) {
 
-        }finally {
+        } finally {
             disConnect(s);
         }
 
