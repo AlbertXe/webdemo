@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  * @author Administrator
@@ -115,5 +116,26 @@ public class SftpUtils {
             disConnect(s);
         }
 
+    }
+
+    /**
+     *
+     * @param dir 带下载目录
+     * @param fileName 下载的文件名
+     * @param localDir 保存的目录
+     */
+    public static void download(String dir, String fileName, String localDir) throws SftpException, FileNotFoundException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+
+        sftp.cd(dir);
+
+        File file = new File(localDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        FileOutputStream os = new FileOutputStream(new File(localDir, fileName));
+        sftp.get( fileName, os);
     }
 }
