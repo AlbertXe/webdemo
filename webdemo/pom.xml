@@ -136,6 +136,11 @@
             <artifactId>jsch</artifactId>
             <version>0.1.54</version>
         </dependency>
+        <!--1.依赖 2.插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
     </dependencies>
 
