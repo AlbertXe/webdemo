@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * @author Administrator
@@ -138,4 +142,94 @@ public class SftpUtils {
         FileOutputStream os = new FileOutputStream(new File(localDir, fileName));
         sftp.get( fileName, os);
     }
+
+    /**
+     * @param dir 目录
+     * @param file 文件
+     * @throws SftpException
+     */
+    public static void delete(String dir, String file) throws SftpException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+        try {
+            sftp.cd(dir);
+            sftp.rm(file);
+        }finally {
+            disConnect(s);
+        }
+    }
+
+    /**
+     *
+     * @param dir 目录
+     */
+    public static List<String> listFiles(String dir) throws SftpException {
+        List<String> result = new ArrayList<>();
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+        Vector ls = sftp.ls(dir);
+        Iterator iterator = ls.iterator();
+        while (iterator.hasNext()) {
+            String filename = ((ChannelSftp.LsEntry) iterator.next()).getFilename();
+            result.add(filename);
+        }
+        return result;
+    }
+
+    /**
+     * 删除目录所有文件
+     */
+    public static void deleteByDir(String dir) throws SftpException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+
+        sftp.cd(dir);
+        List<String> files = listFiles(dir);
+        for (String file : files) {
+            sftp.rm(file);
+        }
+    }
+
+    /**
+     * 删除目录  必须为空
+     * @param dir
+     */
+    public static void deleteDir(String dir) throws SftpException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+        sftp.rmdir(dir);
+    }
+
+    /**
+     * 创建目录
+     * @param dictionary
+     * @param dir
+     */
+    public static void createDir(String dictionary, String dir) throws SftpException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+        sftp.cd(dictionary);
+        sftp.mkdir(dir);
+    }
+
+    /**
+     * 重命名
+     * @param dir
+     * @param oldName
+     * @param newName
+     */
+    public static void rename(String dir, String oldName, String newName) throws SftpException {
+        SFTP s = new SFTP();
+        connect(s);
+        ChannelSftp sftp = s.getSftp();
+        sftp.cd(dir);
+        sftp.rename(oldName, newName);
+    }
+
+
 }
