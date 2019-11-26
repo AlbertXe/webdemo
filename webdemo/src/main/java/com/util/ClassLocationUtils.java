@@ -11,7 +11,7 @@ import java.security.ProtectionDomain;
 /**
  * 查找class的 具体来源
  *
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-07 13:59
  */
 public class ClassLocationUtils {

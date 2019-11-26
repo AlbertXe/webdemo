@@ -14,7 +14,7 @@ import java.io.File;
 /**
  * CEPH工具 由于服务器原因不能成功
  *
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-18 16:34
  */
 public class CephUtils {

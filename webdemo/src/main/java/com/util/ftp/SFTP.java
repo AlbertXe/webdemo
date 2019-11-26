@@ -6,7 +6,7 @@ import com.jcraft.jsch.Session;
 
 /**
  * JSCH实现SFTP文件管理（上传、下载等）
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-20 14:34
  */
 public class SFTP {

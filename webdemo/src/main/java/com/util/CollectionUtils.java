@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * 集合工具类
  *
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-12 14:13
  */
 public class CollectionUtils {

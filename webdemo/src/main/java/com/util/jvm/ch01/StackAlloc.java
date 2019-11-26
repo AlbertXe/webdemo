@@ -7,7 +7,7 @@ package com.util.jvm.ch01;
  * -XX:-UseTLAB   为每个线程预备一块内存 。 避免多个线程竞争一个内存
  *
  * *****栈上分配  -server  逃逸分析   标量替换都要开启   关闭开启差了10倍
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-24 16:41
  */
 public class StackAlloc {

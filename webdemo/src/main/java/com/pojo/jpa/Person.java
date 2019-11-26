@@ -3,7 +3,7 @@ package com.pojo.jpa;
 import javax.persistence.*;
 
 /**
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-07 14:52
  */
 @Entity

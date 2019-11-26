@@ -11,7 +11,7 @@ import javax.sql.DataSource;
  * druid 数据库
  * spring不支持自动 配置
  *
- * @author Administrator
+ * @author AlbertXe
  * @date 2019-11-18 20:00
  */
 @Configuration
