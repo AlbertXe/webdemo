@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.aop.CountTimes;
 import com.dao.BookDao;
 import com.dao.UserDao;
 import com.github.pagehelper.PageInfo;
@@ -43,6 +44,7 @@ public class UserController {
         return users;
     }
     @RequestMapping("/user")
+    @CountTimes
     public User getUser(@Valid User user) {
        return userDao.getUser(user.getId());
     }
