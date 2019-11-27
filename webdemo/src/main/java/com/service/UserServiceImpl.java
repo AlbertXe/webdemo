@@ -26,12 +26,6 @@ public class UserServiceImpl implements UserService {
         List<User> user2List = new ArrayList<>();
         PageHelper.startPage(1, 5);
         List<User> users = userDao.getUsers();
-        for (User user : users) {
-
-            User user2 = new User();
-            user2.setId(user.getId());
-            user2List.add(user2);
-        }
-        return user2List;
+        return users;
     }
 }

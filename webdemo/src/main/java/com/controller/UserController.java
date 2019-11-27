@@ -39,6 +39,7 @@ public class UserController {
 
         long total = pageInfo.getTotal();
         logger.debug("total={}", total);
+        System.out.println("users="+users);
         System.out.println("total=" + total);
 
         Book book = bookDao.selectById(1);
