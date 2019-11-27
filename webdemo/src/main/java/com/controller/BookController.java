@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.dao.BookDao;
+import com.dao.master.BookDao;
 import com.pojo.Book;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

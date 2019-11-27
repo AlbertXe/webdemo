@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.master;
 
 import com.pojo.Book;
 import org.springframework.stereotype.Component;

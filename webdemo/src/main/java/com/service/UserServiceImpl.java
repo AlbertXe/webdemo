@@ -1,9 +1,10 @@
 package com.service;
 
-import com.dao.UserDao;
+import com.dao.cluster.UserDao;
 import com.github.pagehelper.PageHelper;
 import com.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
+    @Qualifier("clusterUserDao")
     private UserDao userDao;
 
 

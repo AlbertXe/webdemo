@@ -1,8 +1,8 @@
 package com.controller;
 
 import com.aop.CountTimes;
-import com.dao.BookDao;
-import com.dao.UserDao;
+import com.dao.cluster.UserDao;
+import com.dao.master.BookDao;
 import com.github.pagehelper.PageInfo;
 import com.pojo.Book;
 import com.pojo.User;
@@ -10,6 +10,7 @@ import com.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
     @Autowired
+    @Qualifier("clusterUserDao")
     private UserDao userDao;
     @Autowired
     private BookDao bookDao;
