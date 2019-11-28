@@ -36,4 +36,17 @@ public class TreeDfsSort {
         }
         return result;
     }
+
+    /**
+     * 深度  递归搜索
+     * @param root
+     */
+    public void sort2(TreeNode root) {
+        if (root != null) {
+            System.out.println(root.value);
+            sort2(root.left);
+            sort2(root.right);
+        }
+
+    }
 }
