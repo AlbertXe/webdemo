@@ -26,19 +26,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
-        <!--swagger-->
+
+        <!--这个jar包 在mybatis-spring-boot-starter已经有了-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.3</version>
         </dependency>
+
         <!--   <dependency>
              <groupId>io.swagger</groupId>
              <artifactId>spring-boot-swagger-starter</artifactId>
            </dependency>-->
+
+        <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -71,14 +74,6 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.1</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
-
         <!--  hibernate  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -117,6 +112,12 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.11.155</version>
+            <exclusions>
+                <exclusion>
+                        <groupId>com.amazonaws</groupId>
+                        <artifactId>aws-java-sdk-simpleworkflow</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
