@@ -2,6 +2,8 @@ package com.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author AlbertXe
@@ -17,5 +19,9 @@ public class DateUtils {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    public static String getTimeNow() {
+        return LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
     }
 }
