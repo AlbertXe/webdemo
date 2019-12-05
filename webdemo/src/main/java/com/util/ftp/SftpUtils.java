@@ -20,10 +20,10 @@ import java.util.Vector;
 public class SftpUtils {
     private static final Logger logger = LoggerFactory.getLogger(SftpUtils.class);
 
-    private static String host = "127.0.0.1";
+    private static String host = "172.31.22.100";
     private static int port = 22;
-    private static String username = "";
-    private static String password = "";
+    private static String username = "xhwsftp";
+    private static String password = "root";
 
     /**
      * 建立连接，放回SFTP
