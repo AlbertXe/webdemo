@@ -92,10 +92,14 @@ public class SftpUtils {
      * @param outDir    服务器目录
      */
     public static void upload(String localFile, String outDir) throws FileNotFoundException {
+        System.out.println("开始上传文件");
         SFTP s = new SFTP();
         connect(s);
         ChannelSftp sftp = s.getSftp();
+
         try {
+            TestException.flag = true;
+            System.out.println("开始上传文件");
             sftp.cd(outDir);//进入目录
         } catch (SftpException e) {
             if (e.id == sftp.SSH_FX_NO_SUCH_FILE) {
@@ -112,10 +116,13 @@ public class SftpUtils {
         File file = new File(localFile);
         try {
             //上传文件
+
             sftp.put(new FileInputStream(file), file.getName());
+            System.out.println("上传文件结束");
 
         } catch (SftpException e) {
-
+            System.out.println("上传失败");
+            e.printStackTrace();
         } finally {
             disConnect(s);
         }
