@@ -52,5 +52,9 @@ public class UserController {
        return userDao.getUser(user.getId());
     }
 
+    @RequestMapping("/login")
+    public void login() {
+    }
+
 
 }

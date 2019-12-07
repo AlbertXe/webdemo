@@ -1,4 +1,4 @@
-package com.listener;
+package com.aop.listener;
 
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
