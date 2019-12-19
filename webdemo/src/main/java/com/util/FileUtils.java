@@ -12,7 +12,6 @@ import java.text.DecimalFormat;
  * @author AlbertXe
  * @date 2019-11-21 21:20
  */
-//@Log4j2
 public class FileUtils {
     static Logger log = LoggerFactory.getLogger(FileUtils.class);
 
@@ -20,6 +19,12 @@ public class FileUtils {
         getCD();
     }
 
+    /**
+     * 可以创建多层目录文件
+     * @param path
+     * @return
+     * @throws IOException
+     */
     public static File getFile(String path) throws IOException {
         File file = new File(path);
         if (file.exists()) {
