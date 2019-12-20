@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class ScheduleTask {
 
     @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(fixedRate = 5000)
     public void task1() {
         System.out.println("执行静态定时任务1");
     }
