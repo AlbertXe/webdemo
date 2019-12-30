@@ -13,7 +13,7 @@ public class SFTPTest {
     @Test
     public void test1(){
         try {
-            SftpUtils.upload("D:\\idea_study\\webdemo\\src\\main\\java\\com\\util\\ftp\\test.txt", "/upload");
+            SftpUtils. upload("D:\\idea_study\\webdemo\\src\\main\\java\\com\\util\\ftp\\test.txt", "/upload");
         } catch (FileNotFoundException e) {
             System.out.println("上传失败");
             e.printStackTrace();
