@@ -9,6 +9,9 @@ public class Complex {
     private static int a = 0x001;
     private static int b = 0x002;
     private static int c = 0x004;
+    private static int d = 0x008;
+    private static int e = 0x010;
+    private static int f = 0x020;
 
     private static final int pmask = 0xFFF;
     int permissions;
