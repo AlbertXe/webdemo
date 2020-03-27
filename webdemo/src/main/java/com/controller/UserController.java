@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -55,6 +56,19 @@ public class UserController {
     @RequestMapping("/login")
     public void login() {
 
+    }
+
+    @RequestMapping("/userList")
+    public String userList(HttpServletRequest request) {
+        List<User> users = userServiceImpl.users();
+        PageInfo pageInfo = new PageInfo(users);
+
+        long total = pageInfo.getTotal();
+        logger.debug("total={}", total);
+        System.out.println("users=" + users);
+        System.out.println("total=" + total);
+        request.setAttribute("users", users);
+        return "/user/users";
     }
 
 
