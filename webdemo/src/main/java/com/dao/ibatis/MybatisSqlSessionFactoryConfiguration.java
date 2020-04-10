@@ -3,7 +3,6 @@ package com.dao.ibatis;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInterceptor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,7 +29,6 @@ import java.util.Objects;
 import java.util.Set;
 
 @Configuration
-@Slf4j
 public class MybatisSqlSessionFactoryConfiguration {
 
     @Autowired
@@ -75,6 +73,7 @@ public class MybatisSqlSessionFactoryConfiguration {
             interceptors.add(mybatisLogInterceptor());
             //还要加载配置的plugins
 
+
             sqlSessionFactoryBean.setPlugins(interceptors.toArray(new Interceptor[]{}));
 
             return sqlSessionFactoryBean.getObject();
@@ -86,7 +85,9 @@ public class MybatisSqlSessionFactoryConfiguration {
     }
 
     private Interceptor mybatisLogInterceptor() {
-        return new MybatisLogInterceptor();
+        MybatisLogInterceptor interceptor = new MybatisLogInterceptor();
+        interceptor.setShowSql(true);
+        return interceptor;
     }
 
     private Interceptor buondValueInterceptor() {
