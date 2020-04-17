@@ -20,7 +20,6 @@ public class BlockThreadPool {
     }
 
     /**
-     * @author chujiejie
      */
     private class CustomThreadFactory implements ThreadFactory {
         private AtomicInteger count = new AtomicInteger(0);
@@ -37,7 +36,6 @@ public class BlockThreadPool {
     /**
      * 改造任务入队方法
      *
-     * @author chujiejie
      */
     private class CustomRejectedExecutionHandler implements RejectedExecutionHandler {
         @Override

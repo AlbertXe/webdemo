@@ -1,6 +1,7 @@
 package com.util.largefilesort;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,6 +11,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ public class LargeFileSort {
     static CountDownLatch doneSignal;
     static String[] genFiles = new String[10];
     static String ROOT_PATH = "D:\\20200411\\";
-    static int SIZE = 1024 * 1; // 1M
+    static int SIZE = 1024 * 10; // 10K
     static List<File> tempFiles = new CopyOnWriteArrayList<>();
 
 
@@ -303,7 +307,7 @@ public class LargeFileSort {
             raf = new RandomAccessFile(file, "rw");
             channel = raf.getChannel();
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024 << 10);//1M
-            for (int i = 0; i < 10000 * 1; i++) {
+            for (int i = 0; i < 100000 * 1; i++) {
                 sb.append(r.nextInt(10000)).append("\n");
                 //分批写入数据
                 if ((i + 1) % 10000 == 0) {
@@ -338,5 +342,14 @@ public class LargeFileSort {
                 }
             }
         }
+    }
+
+    @Test
+    public void getHeap() {
+        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+        MemoryUsage heapMemory = memoryMXBean.getHeapMemoryUsage();
+        long maxHeap = heapMemory.getMax();
+        log.info("堆内存大小" + maxHeap / (1024 * 1024));
+//        return maxHeap;
     }
 }
