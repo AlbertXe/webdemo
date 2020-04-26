@@ -1,13 +1,23 @@
 package com.util.ftp;
 
-import com.jcraft.jsch.*;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -59,6 +69,42 @@ public class SftpUtils {
         s.setSession(session);
         s.setChannel(channel);
         s.setSftp(channelSftp);
+    }
+
+    /**
+     * 建立连接，放回SFTP
+     *
+     * @param s
+     */
+    public static void exec(SFTP s) {
+        JSch jSch = new JSch();
+        Session session = null;
+        Channel channel = null;
+        ChannelExec channelExec = null;
+        try {
+            session = jSch.getSession(username, host, port);
+            session.setPassword(password);
+            session.setConfig("StrictHostKeyChecking", "no");//不验证host
+            session.connect();
+        } catch (JSchException e) {
+            logger.error("连接服务器失败,请检查主机[" + host + "],端口[" + port
+                    + "],用户名[" + username + "],端口[" + port
+                    + "]是否正确,以上信息正确的情况下请检查网络连接是否正常或者请求被防火墙拒绝.");
+        }
+
+        try {
+            channel = session.openChannel("exec");
+            channel.connect();
+        } catch (JSchException e) {
+            logger.error("连接服务器失败,请检查主机[" + host + "],端口[" + port
+                    + "],用户名[" + username + "],端口[" + port
+                    + "]是否正确,以上信息正确的情况下请检查网络连接是否正常或者请求被防火墙拒绝.");
+        }
+        channelExec = (ChannelExec) channel;
+
+        s.setSession(session);
+        s.setChannel(channel);
+        s.setExec(channelExec);
     }
 
     /**
@@ -236,6 +282,37 @@ public class SftpUtils {
         ChannelSftp sftp = s.getSftp();
         sftp.cd(dir);
         sftp.rename(oldName, newName);
+    }
+
+    /**
+     * 执行ssh 命令
+     *
+     * @param commond
+     */
+    public static void exec(String commond) {
+        SFTP s = new SFTP();
+        exec(s);
+        ChannelExec exec = s.getExec();
+        exec.setCommand(commond);
+        try {
+            exec.connect();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        //加入代码代码
+
+        try {
+            InputStream in = exec.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String buf;
+            while ((buf = reader.readLine()) != null) {
+                System.out.println(buf);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

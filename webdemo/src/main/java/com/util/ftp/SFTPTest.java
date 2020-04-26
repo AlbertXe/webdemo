@@ -20,4 +20,9 @@ public class SFTPTest {
         }
 
     }
+
+    @Test
+    public void test2() {
+        SftpUtils.exec("ls -l");
+    }
 }

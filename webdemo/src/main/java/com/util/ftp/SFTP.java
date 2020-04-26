@@ -1,14 +1,19 @@
 package com.util.ftp;
 
 import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * JSCH实现SFTP文件管理（上传、下载等）
  * @author AlbertXe
  * @date 2019-11-20 14:34
  */
+@Getter
+@Setter
 public class SFTP {
     /**
      * 会话
@@ -22,6 +27,8 @@ public class SFTP {
      * sftp实际操作
      */
     private ChannelSftp sftp;
+
+    private ChannelExec exec;
 
 
     public Session getSession() {
