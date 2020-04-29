@@ -14,7 +14,7 @@ public class SFTPTest {
             final int j = i;
             Thread thread = new Thread(() -> {
                 SftpInfo sftpInfo = new SftpInfo();
-                sftpInfo.setIp("172.31.22.100");
+                sftpInfo.setIp("172.31.28.116");
                 sftpInfo.setPort("22");
                 sftpInfo.setUsername("xhwsftp");
                 sftpInfo.setPwd("root");
@@ -32,5 +32,13 @@ public class SFTPTest {
             thread.start();
 
         }
+    }
+
+    @Test
+    public void test1() {
+        String path = "\\\\";
+        String s = path.replaceAll("//+|\\\\+", "/");
+        System.out.println(path);
+        System.out.println(s);
     }
 }
