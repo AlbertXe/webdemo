@@ -20,6 +20,7 @@ public class SFTPFactory extends BasePooledObjectFactory<Channel> {
     @Override
     public Channel create() throws Exception {
         //TODO 创建sftp channel
+
         return null;
     }
 

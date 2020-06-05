@@ -30,7 +30,8 @@ import java.util.Vector;
 public class SftpUtils {
     private static final Logger logger = LoggerFactory.getLogger(SftpUtils.class);
 
-    private static String host = "172.31.22.100";
+    //    private static String host = "172.31.22.100";
+    private static String host = "172.31.28.116";
     private static int port = 22;
     private static String username = "xhwsftp";
     private static String password = "root";
