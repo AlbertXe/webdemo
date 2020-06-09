@@ -15,6 +15,9 @@ class WebdemoApplicationTests {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    com.dao.cluster.UserDao clusterUserDao;
+
     /**
      * 事务测试
      */
@@ -23,6 +26,18 @@ class WebdemoApplicationTests {
     void contextLoads() {
         User user = new User(null, "xie");
         int i = userDao.insert(user);
+        log.info("用户{}", user);
+        int a = 1 / 0;
+    }
+
+    /**
+     * 事务测试
+     */
+    @Test
+    @Transactional(value = "clusterTransactionManager")
+    void test1() {
+        User user = new User(null, "xie");
+        int i = clusterUserDao.insert(user);
         log.info("用户{}", user);
         int a = 1 / 0;
     }
