@@ -12,7 +12,6 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -25,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Configuration
@@ -34,14 +32,14 @@ public class MybatisSqlSessionFactoryConfiguration {
     @Autowired
     private DataSource dataSource;
 
-    private static Objects BLOCK;
+    private static Object BLOCK = new Object();
 
     //枚举处理
     private Set<Class<? extends EnumType>> sets;
     private static String ENUMPAC = "com.enums";
 
     @Bean
-    @ConditionalOnMissingBean(SqlSessionFactory.class)
+//    @ConditionalOnMissingBean(SqlSessionFactory.class)
     public SqlSessionFactory sqlSessionFactory() {
         try {
             String mappers = "classpath*:com/dao/**/master/**/*Mapper*.xml";
@@ -84,17 +82,20 @@ public class MybatisSqlSessionFactoryConfiguration {
 
     }
 
-    private Interceptor mybatisLogInterceptor() {
+    @Bean
+    public Interceptor mybatisLogInterceptor() {
         MybatisLogInterceptor interceptor = new MybatisLogInterceptor();
         interceptor.setShowSql(true);
         return interceptor;
     }
 
-    private Interceptor buondValueInterceptor() {
+    @Bean
+    public Interceptor buondValueInterceptor() {
         return new BoundDefaultValueInterceptor();
     }
 
-    private Interceptor pageIntercepter() {
+    @Bean
+    public Interceptor pageIntercepter() {
         PageInterceptor interceptor = new PageInterceptor();
         return interceptor;
     }
