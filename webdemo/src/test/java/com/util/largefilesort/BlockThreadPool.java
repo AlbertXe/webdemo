@@ -79,7 +79,7 @@ public class BlockThreadPool {
                 public void run() {
                     try {
                         System.out.println(Thread.currentThread().getId() + "=====开始");
-                        TimeUnit.SECONDS.sleep(10);
+                        TimeUnit.SECONDS.sleep(2);
                         System.out.println(Thread.currentThread().getId() + "=====结束");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
