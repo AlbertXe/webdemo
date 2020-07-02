@@ -1,4 +1,4 @@
-package com.all.design23.n15_observer.n16_iterator;
+package com.all.design23.n16_iterator;
 
 public interface Collection {
     Iterator iterator();
