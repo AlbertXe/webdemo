@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -28,6 +32,29 @@ public class FileUtils {
     public static void main(String[] args) {
         getCD();
     }
+
+    /**
+     * NIO方式copy
+     *
+     * @param source
+     * @param target
+     * @throws IOException
+     */
+    public static void copyNIO(String source, String target) throws IOException {
+        try (FileInputStream is = new FileInputStream(source)) {
+            try (FileOutputStream os = new FileOutputStream(target)) {
+                FileChannel outChannel = os.getChannel();
+                FileChannel inChannel = is.getChannel();
+                ByteBuffer buffer = ByteBuffer.allocate(4086);
+                while (inChannel.read(buffer) != -1) {
+                    buffer.flip();
+                    outChannel.write(buffer);
+                    buffer.clear();
+                }
+            }
+        }
+    }
+
 
     /**
      * 可以创建多层目录文件
