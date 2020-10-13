@@ -3,6 +3,7 @@ package com.all.sort;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description: 排序工具
@@ -41,7 +42,12 @@ public class SortUtils {
             Collections.sort(bucketArr.get(i));
             System.out.println(bucketArr.get(i));
         }
+        // flatMap的说明：这个在这里的主要作用是对流进行扁平化
+        List<Integer> result = bucketArr.stream().flatMap(t -> t.stream()).collect(Collectors.toList());
+        List<List<Integer>> result2 = bucketArr.stream().collect(Collectors.toList());
 
+        System.out.println("结果:" + result);
+        System.out.println("结果:" + result2);
         return null;
     }
 }
