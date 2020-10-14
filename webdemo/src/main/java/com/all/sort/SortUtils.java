@@ -50,4 +50,51 @@ public class SortUtils {
         System.out.println("结果:" + result2);
         return null;
     }
+
+    /**
+     * 归并排序
+     *
+     * @param ss
+     * @return
+     */
+    public static void mergeSort(int[] ss, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int mid = (left + right) / 2;
+        mergeSort(ss, left, mid);
+        mergeSort(ss, mid + 1, right);
+        merge(ss, left, mid, right);
+    }
+
+    private static void merge(int[] ss, int l_left, int mid, int r_right) {
+        int[] tempArr = new int[ss.length];
+        int r_left = mid + 1;
+        int l_right = mid;
+
+        // third记录临时数组的索引
+        int third = l_left;
+
+        int temp = l_left;
+        while (l_left <= l_right && r_left <= r_right) {
+            // 从两个数组中取出最小的放入临时数组
+            if (ss[l_left] <= ss[r_left]) {
+                tempArr[third++] = ss[l_left++];
+            } else {
+                tempArr[third++] = ss[r_left++];
+            }
+        }
+        //剩余部分依次放入临沭数组
+        while (r_left <= r_right) {
+            tempArr[third++] = ss[r_left++];
+        }
+        while (l_left <= l_right) {
+            tempArr[third++] = ss[l_left++];
+        }
+
+        while (temp <= r_right) {
+            ss[temp] = tempArr[temp++];
+        }
+
+    }
 }
