@@ -1,6 +1,7 @@
 package com.all.sort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,6 +68,45 @@ public class SortUtils {
         merge(ss, left, mid, right);
     }
 
+    /**
+     * 基数排序
+     *
+     * @param ss
+     */
+    public static void baseSort(int[] ss) {
+        // 分0-9桶  一次排序 个十百
+        List<List<Integer>> bucket = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            List<Integer> list = new ArrayList<>();
+            bucket.add(list);
+        }
+        int max = max(ss);
+        int num = 1; //最大数是几位数  也决定了循环次数
+        while (max >= 10) {
+            max /= 10;
+            num++;
+        }
+        for (int i = 0; i < num; i++) {
+            // 各位上的逻辑
+            for (int j = 0; j < ss.length; j++) {
+                int pow = (int) Math.pow(10, i);
+                int n = ss[j] / pow % 10;
+                bucket.get(n).add(ss[j]);
+            }
+            // 将各个桶内元素给 ss
+            int count = 0;
+            for (int j = 0; j < 10; j++) {
+                while (bucket.get(j).size() > 0) {
+                    List<Integer> list = bucket.get(j);
+                    ss[count] = list.get(0);
+                    list.remove(0);
+                    count++;
+                }
+            }
+        }
+    }
+
+
     private static void merge(int[] ss, int l_left, int mid, int r_right) {
         int[] tempArr = new int[ss.length];
         int r_left = mid + 1;
@@ -95,6 +135,9 @@ public class SortUtils {
         while (temp <= r_right) {
             ss[temp] = tempArr[temp++];
         }
+    }
 
+    private static int max(int[] ss) {
+        return Arrays.stream(ss).max().getAsInt();
     }
 }
