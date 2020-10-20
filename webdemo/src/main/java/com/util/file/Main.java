@@ -3,17 +3,15 @@ package com.util.file;
 public class Main {
 
     public static void main(String[] args) {
-        BigFileReader.Builder builder = new BigFileReader.Builder("d:/a.txt", new IHandle() {
+        BigFileReader.Builder builder = new BigFileReader.Builder("d:/a.txt");
 
-            @Override
-            public void handle(String line) {
-                System.out.println(line);
-                //increat();
-            }
-        });
-        builder.withTreahdSize(10)
+        builder.withThreadSize(10)
                 .withCharset("gbk")
-                .withBufferSize(1024 * 1024);
+                .withBuffSize(1024)
+                .withFunction(line -> {
+                    System.out.println(line);
+                    return line;
+                });
         BigFileReader bigFileReader = builder.build();
         bigFileReader.start();
     }
