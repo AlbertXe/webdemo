@@ -17,7 +17,7 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 /**
  * @description: 单文件读取
@@ -25,10 +25,10 @@ import java.util.function.Function;
  * @create: 2020-10-20 12:50
  */
 public class BigFileReader {
-    private int threadSize = 10;
-    private int buffSize = 1 << 20;
+    private int threadSize;
+    private int buffSize;
     private String charset;
-    private Function function;
+    private Consumer consumer;
 
     private long fileLength;
     private ExecutorService executorService;
@@ -38,11 +38,11 @@ public class BigFileReader {
     private Set<StartEndPair> pairs = new HashSet<>();
 
 
-    public BigFileReader(File file, int threadSize, int buffSize, String charset, Function function) {
+    public BigFileReader(File file, int threadSize, int buffSize, String charset, Consumer consumer) {
         this.threadSize = threadSize;
         this.buffSize = buffSize;
         this.charset = charset;
-        this.function = function;
+        this.consumer = consumer;
         fileLength = file.length();
         executorService = Executors.newFixedThreadPool(threadSize);
         try {
@@ -128,7 +128,7 @@ public class BigFileReader {
                 line = new String(bs, Charset.forName(charset));
             }
             if (StringUtils.isNotBlank(line)) {
-                function.apply(line);
+                consumer.accept(line);
                 count.incrementAndGet();
             }
         }
@@ -179,8 +179,8 @@ public class BigFileReader {
         private File file;
         private int threadSize = 10;
         private int buffSize = 1 << 20;
-        private String charset;
-        private Function function;
+        private String charset = "gbk";
+        private Consumer consumer;
 
         public Builder(String file) {
             this.file = new File(file);
@@ -201,14 +201,14 @@ public class BigFileReader {
             return this;
         }
 
-        public Builder withFunction(Function function) {
-            this.function = function;
+        public Builder withConsumer(Consumer consumer) {
+            this.consumer = consumer;
             return this;
         }
 
 
         public BigFileReader build() {
-            BigFileReader bigFileReader = new BigFileReader(file, threadSize, buffSize, charset, function);
+            BigFileReader bigFileReader = new BigFileReader(file, threadSize, buffSize, charset, consumer);
             return bigFileReader;
         }
     }
