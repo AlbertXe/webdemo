@@ -18,7 +18,7 @@ public class Atree {
     }
 
     private String id;
-    private String name;
+    private String name="";
     private List<Atree> childes = new ArrayList<>();
     private Atree parent;
     private boolean flag = false;
@@ -26,6 +26,10 @@ public class Atree {
     public void addChild(Atree child) {
         childes.add(child);
         child.setParent(this);
+    }
+
+    public void removeChild(Atree chile) {
+        childes.remove(chile);
     }
 
 
@@ -66,8 +70,8 @@ public class Atree {
         return "Atree{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", childes=" + childes +
                 ", flag=" + flag +
+                ", childes=" + childes +
                 '}';
     }
 }

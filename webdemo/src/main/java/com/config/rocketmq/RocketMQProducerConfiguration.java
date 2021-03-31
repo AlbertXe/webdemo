@@ -1,6 +1,6 @@
 package com.config.rocketmq;
 
-import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
+//import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
 
 /**
  * @description: Rocket MQ 生产者
@@ -12,8 +12,8 @@ public class RocketMQProducerConfiguration {
 
     private RocketMQConsumerFactory rocketMQConsumerFactory;
 
-    public DefaultMQPushConsumer defaultMQPushConsumer() {
-        rocketMQConsumerFactory.get("");
-        return null;
-    }
+//    public DefaultMQPushConsumer defaultMQPushConsumer() {
+//        rocketMQConsumerFactory.get("");
+//        return null;
+//    }
 }

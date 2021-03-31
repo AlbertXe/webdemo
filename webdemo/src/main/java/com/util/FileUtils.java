@@ -1,5 +1,6 @@
 package com.util;
 
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +64,8 @@ public class FileUtils {
      * @return
      * @throws IOException
      */
-    public static File getFile(String path) throws IOException {
+    @SneakyThrows
+    public static File getFile(String path){
         File file = new File(path);
         if (file.exists()) {
             return file;
@@ -149,5 +151,18 @@ public class FileUtils {
             }
         });
         return files;
+    }
+
+    public static List<String> lines(File file, String charset) {
+        return null;
+    }
+
+    public static void combineFiles(List<File> tempFiles, File file) {
+    }
+
+    public static void write(File tempFile, String result, String charset) {
+    }
+
+    public static void copyFile(File tempFile, File file) {
     }
 }
